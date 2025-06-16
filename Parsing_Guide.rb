@@ -15,6 +15,33 @@ serialized_beatles = File.read(filepath)
 
 beatles = JSON.parse(serialized_beatles)
 
+# Store data in a .JSON file
+require "json"
+
+band = { band [
+  first_name "Marlon"
+      last_name "Steiner"
+      instrument "Guitar"
+}
+[...]
+]}
+
+File.open(filepath, "w") do |file|
+  file.write(JSON.generate(beatles))
+
+# Parse Json file from an API
+require "json"
+require "open-uri"
+
+api_url = "http://linkedin-marlonsteiner.com"
+
+Uri.open(api_url) do |stream|
+  quote = JSON.parse(stream.read)
+  puts quote["setup"]
+  pust quote["delivery"]
+end
+end
+
 # gem  used to parse .xml/.html
 require "nokogiri"
 
@@ -52,14 +79,13 @@ CSV.open(filepath, "wb") do |csv|
   csv << ["Sidney", "White", "Drums"]
 end
 
-# Parse Json file from an API
-require "json"
-require "open-uri"
+# Parse CSV file row by row
+require "csv"
 
-api_url = "http://linkedin-marlonsteiner.com"
+filepath = "/my_folder"/beatles.csv"
 
-Uri.open(api_url) do |stream|
-  quote = JSON.parse(stream.read)
-  puts quote["setup"]
-  pust quote["delivery"]
+CSV.foreach(filepath) do |row|
+  puts ""#{row[0]} #{row[1]} played #{row[2]}"
 end
+
+
