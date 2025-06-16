@@ -38,3 +38,28 @@ builder = Nokogiri::XML::Builder.new(encoding: "UTF-8") do
 end
 
 File.open(filepath, "w") { |file| file.write(builder.to_xml)}
+
+# Store data in a .csv file
+# CSV::open
+
+require "csv"
+
+filepath = "musician.csv"
+
+CSV.open(filepath, "wb") do |csv|
+  csv << ["First Name", "Last Name", "Instrument"]
+  csv << ["Marlon", "Steiner", "Guitar"]
+  csv << ["Sidney", "White", "Drums"]
+end
+
+# Parse Json file from an API
+require "json"
+require "open-uri"
+
+api_url = "http://linkedin-marlonsteiner.com"
+
+Uri.open(api_url) do |stream|
+  quote = JSON.parse(stream.read)
+  puts quote["setup"]
+  pust quote["delivery"]
+end
